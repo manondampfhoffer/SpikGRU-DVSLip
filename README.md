@@ -22,7 +22,7 @@ Indicate the dataset path (train_data_root and test_data_root) in the main.py. T
 Note: The training was performed with GPU NVIDIA A100 with 40GB memory. To reduce the GPU memory usage, reduce the number of frames (--nbframes).
 
 ## Training the models
-Below are the scripts used to train the different versions of the model. See the main.py for the details of the possible arguments.
+Below are the scripts used to train the different versions of the model. See the main.py for the details of the possible arguments. Note: the SNN was trained with 100 epochs with a fixed learning rate and then fine-tuned with a decaying learning rate for a 100 more epochs to obtain the results of the paper (see paper for details), see section Fine-tuning the models for the fine-tuning.
 
 ### Main results
 SNN SpikGRU2+ (hybrid: SpikeAct in the frontend and SpikeAct_signed in the backend)
@@ -87,14 +87,13 @@ Spatial
 ```
 python main.py -e 100 -b 32 --nbframes 90 --augS -a
 ```
-Temporal with different hyperaparameters
-For temporal masking with different number of masks and mask length: set --Tnbmask (number of masks) --Tmaxmasklength (maximum mask length)
+Temporal with different hyperaparameters. For temporal masking with different number of masks and mask length: set --Tnbmask (number of masks) --Tmaxmasklength (maximum mask length)
 ```
 python main.py -e 100 -b 32 --nbframes 90 --augS --augT -a --Tnbmask 6 --Tmaxmasklength 18
 ```
 
 ## Fine-tuning the models
-The SNN needs 100 epochs of training and then 100 epochs of finetuning to obtain the results of the paper (see paper for details). You can finetune a trained model with the command --finetune, indicating the model's name with -f:
+The SNN was trained with 100 epochs with a fixed learning rate and then fine-tuned with a decaying learning rate for a 100 more epochs to obtain the results of the paper (see paper for details). You can finetune a trained model with the command --finetune, indicating the model's name with -f:
 ```
 python main.py -e 100 -b 32 --nbframes 90 --augS --augT --useBN --hybridsign -f [modelname] --finetune
 ```
