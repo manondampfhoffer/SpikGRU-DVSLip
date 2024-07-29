@@ -171,11 +171,11 @@ def compute_classification_accuracy(model, dataloader, valid=False):
                 avg_spike_act[i].append(l)
             avg_in_act.append(x_batch.abs().mean().detach().cpu().numpy())
 
-            if ni % 20 == 0:
-                print("testing iter...", ni, np.mean(accs))
+            # if ni % 20 == 0:
+            #     print("testing iter...", ni, np.mean(accs))
 
     testaccu = np.mean(accs)
-    print("test accu:", testaccu)
+    print("Test accuracy:", testaccu)
 
     if len(spike_act) == 22:
         layer_names = ["conv1", "pool1", "conv2_1", "conv2_11", "conv2_2", "conv2_21", "conv3_1", "conv3_11", "conv3_2", "conv3_21", "conv4_1", "conv4_11", "conv4_2","conv4_21","conv5_1","conv5_11","conv5_2", "conv5_21","avgpool","gru1", "gru2", "gru3"]
