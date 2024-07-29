@@ -97,6 +97,10 @@ The SNN was trained with 100 epochs with a fixed learning rate and then fine-tun
 ```
 python main.py -e 100 -b 32 --nbframes 90 --augS --augT --useBN --hybridsign -f [modelname] --finetune
 ```
+Furthermore, the models were fine-tuned with spike loss using --actreg argument which sets the coefficient for the spike loss (default to 0) :
+```
+python main.py -e 100 -b 32 --nbframes 90 --augS --augT --useBN --hybridsign -f [modelname] --finetune --actreg 5.0
+```
 
 ## Testing a model
 You can test a trained model with the command -t:
