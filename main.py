@@ -216,7 +216,7 @@ if not args.is_test:
         final_lr = 5e-6 * (args.batch_size / 32)
     else:
         if args.finetune:
-            lr = 1e-3 * (args.batch_size / 32)
+            lr = 3e-4 * (args.batch_size / 32)
             final_lr = 5e-6 * (args.batch_size / 32)
         else:
             lr = 3e-4 * (args.batch_size / 32)
