@@ -19,7 +19,7 @@ If you use this code, please cite the paper:
 ## Setting the code and environnment
 Use the file pytorchenv.yml to install the pytorch environment used to run this code.
 Indicate the dataset path (train_data_root and test_data_root) in the main.py. The DVS-Lip dataset can be downloaded here: https://sites.google.com/view/event-based-lipreading
-Note: The training was performed with GPU NVIDIA A100 with 40GB memory. To reduce the GPU memory usage, reduce the number of frames (--nbframes).
+Note: The training was performed with GPU NVIDIA A100 with 40GB memory. To reduce the GPU memory usage, reduce the number of frames (--nbframes) (NB: be careful if changing the number of frames, the parameters of the temporal augmentation, in particular mask length, should be changed accordingly).
 
 ## Training the models
 Below are the scripts used to train the different versions of the model. See the main.py for the details of the possible arguments. Note: the SNN was trained with 100 epochs with a fixed learning rate and then fine-tuned with a decaying learning rate for a 100 more epochs to obtain the results of the paper (see paper for details), see section Fine-tuning the models for the fine-tuning.
@@ -28,6 +28,9 @@ Below are the scripts used to train the different versions of the model. See the
 SNN SpikGRU2+ (hybrid: SpikeAct in the frontend and SpikeAct_signed in the backend)
 ```
 python main.py -e 100 -b 32 --nbframes 90 --augS --augT --useBN --hybridsign
+
+# example with 30 frames, which can run on a smaller GPU with 16GB:
+# python main.py -e 100 -b 32 --nbframes 30 --augS --augT --useBN --hybridsign --Tnbmask 6 --Tmaxmasklength 6 # default values of temporal augmentation must be changed
 ```
 ANN
 ```
